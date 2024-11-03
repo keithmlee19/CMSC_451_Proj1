@@ -3,37 +3,16 @@ public class InsertionSort extends AbstractSort {
 
   @Override
   public int[] sort(int[] array) {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  protected void startSort() {
-    // TODO Auto-generated method stub
-
-  }
-
-  @Override
-  protected void endSort() {
-    // TODO Auto-generated method stub
-
-  }
-
-  @Override
-  protected void incrementCount() {
-    // TODO Auto-generated method stub
-
-  }
-
-  @Override
-  public int getCount() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  @Override
-  public long getTime() {
-    // TODO Auto-generated method stub
-    return 0;
+    int n = array.length;
+    for (int i = 1; i < n; i++) {
+    	int key = array[i];
+    	int j = i-1;
+    	while (j >= 0 && array[j] > key) {
+    		array[j+1] = array[j];
+    		j--;
+    	}
+    	array[j+1] = key;
+    }
+    return array;
   }
 }

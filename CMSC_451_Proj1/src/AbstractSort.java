@@ -1,14 +1,28 @@
 
 public abstract class AbstractSort {
+	protected int count;
+	protected long startTime, endTime, elapsedTime;
+	
 	public abstract int[] sort(int[] array);
 	
-	protected abstract void startSort();
+	protected void startSort() {
+		startTime = System.nanoTime();
+	}
 	
-	protected abstract void endSort();
+	protected void endSort() {
+		endTime = System.nanoTime();
+	}
 	
-	protected abstract void incrementCount();
+	protected void incrementCount() {
+		count++;
+	}
 	
-	public abstract int getCount();
+	public int getCount() {
+		return count;
+	}
 	
-	public abstract long getTime();
+	public long getTime() {
+		elapsedTime = endTime - startTime;
+		return elapsedTime;
+	}
 }
