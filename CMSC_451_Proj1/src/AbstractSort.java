@@ -6,6 +6,7 @@ public abstract class AbstractSort {
 	public abstract int[] sort(int[] array);
 	
 	protected void startSort() {
+		count = 0;
 		startTime = System.nanoTime();
 	}
 	

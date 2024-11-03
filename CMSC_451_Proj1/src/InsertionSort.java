@@ -10,8 +10,10 @@ public class InsertionSort extends AbstractSort {
     	while (j >= 0 && array[j] > key) {
     		array[j+1] = array[j];
     		j--;
+    		incrementCount();
     	}
     	array[j+1] = key;
+    	incrementCount();
     }
     return array;
   }
