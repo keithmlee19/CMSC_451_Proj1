@@ -6,8 +6,8 @@ public class BenchmarkSorts {
 	private static int[][] sortingData;
 	
 	private static int[][] generateSortingData(int datasetSize) {
-		int[][] generatedData = new int[NUM_DATASETS][datasetSize];
-		for (int i = 0; i < NUM_DATASETS; i++) {
+		int[][] generatedData = new int[NUM_DATASETS+3][datasetSize];
+		for (int i = 0; i < NUM_DATASETS+3; i++) {
 			for (int j = 0; j < datasetSize; j++) {
 				generatedData[i][j] = (int)(Math.random() * 1000);
 			}
@@ -36,9 +36,17 @@ public class BenchmarkSorts {
 		  // write size to file
 		  bubbleWriter.write(size + " ");
 		  // sort data, write outputs to file
-		  for (int[] dataSet : sortingData) {
+		  // warmup runs
+		  for (int i = 0; i < 3; i++) {
 			  bubbleSort.startSort();
-			  int[] bubbleSortedData = bubbleSort.sort(dataSet);			  
+			  int[] bubbleSortedData = bubbleSort.sort(sortingData[i]);			  
+			  bubbleSort.endSort();
+			  assert bubbleSort.isSorted(bubbleSortedData);
+		  }
+		  // actual recorded runs
+		  for (int i = 3; i < sortingData.length; i++) {
+			  bubbleSort.startSort();
+			  int[] bubbleSortedData = bubbleSort.sort(sortingData[i]);			  
 			  bubbleSort.endSort();
 			  assert bubbleSort.isSorted(bubbleSortedData);
 			  bubbleWriter.write(bubbleSort.getCount() + " " + bubbleSort.getTime() + " ");
@@ -50,9 +58,17 @@ public class BenchmarkSorts {
 		  // write size to file
 		  insertionWriter.write(size + " ");
 		  // sort data, write outputs to file
-		  for (int[] dataSet : sortingData) {
+		  // warmup runs
+		  for (int i = 0; i < 3; i++) {
 			  insertionSort.startSort();
-			  int[] insertionSortedData = insertionSort.sort(dataSet);			  
+			  int[] insertionSortedData = insertionSort.sort(sortingData[i]);			  
+			  insertionSort.endSort();
+			  assert insertionSort.isSorted(insertionSortedData);
+		  }
+		  // actual recorded runs
+		  for (int i = 3; i < sortingData.length; i++) {
+			  insertionSort.startSort();
+			  int[] insertionSortedData = insertionSort.sort(sortingData[i]);			  
 			  insertionSort.endSort();
 			  assert insertionSort.isSorted(insertionSortedData);
 			  insertionWriter.write(insertionSort.getCount() + " " + insertionSort.getTime() + " ");
