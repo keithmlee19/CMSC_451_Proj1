@@ -9,13 +9,13 @@ public class BenchmarkSorts {
 		int[][] generatedData = new int[NUM_DATASETS][datasetSize];
 		for (int i = 0; i < NUM_DATASETS; i++) {
 			for (int j = 0; j < datasetSize; j++) {
-				generatedData[i][j] = (int)(Math.random() * 10000);
+				generatedData[i][j] = (int)(Math.random() * 1000);
 			}
 		}
 		return generatedData;
 	}
 
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) throws IOException, UnsortedException{
 	  // 12 evenly spaced data set sizes
 	  int[] datasetSizes = new int[]{500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000};
 	  
@@ -29,7 +29,7 @@ public class BenchmarkSorts {
 	    
 	  // benchmark each sort
 	  for (int size : datasetSizes) {
-		  // create data set of the current size to be sorted by both algorithms
+		  // create 40 datasets of the current size to be sorted by both algorithms
 		  sortingData = generateSortingData(size);
 		  
 		  // benchmark bubble sort
@@ -38,11 +38,13 @@ public class BenchmarkSorts {
 		  // sort data, write outputs to file
 		  for (int[] dataSet : sortingData) {
 			  bubbleSort.startSort();
-			  bubbleSort.sort(dataSet);
+			  int[] bubbleSortedData = bubbleSort.sort(dataSet);			  
 			  bubbleSort.endSort();
+			  assert bubbleSort.isSorted(bubbleSortedData);
 			  bubbleWriter.write(bubbleSort.getCount() + " " + bubbleSort.getTime() + " ");
+			  // bubbleWriter.write("Count: " + bubbleSort.getCount() + " Comparisons: " + bubbleSort.getComparisons() + " Swaps: " + bubbleSort.getSwaps() + " ");
 		  }
-		  bubbleWriter.write("\n");
+		  bubbleWriter.write("\n");		  
 		  
 		  // benchmark insertion sort
 		  // write size to file
@@ -50,9 +52,11 @@ public class BenchmarkSorts {
 		  // sort data, write outputs to file
 		  for (int[] dataSet : sortingData) {
 			  insertionSort.startSort();
-			  insertionSort.sort(dataSet);
+			  int[] insertionSortedData = insertionSort.sort(dataSet);			  
 			  insertionSort.endSort();
+			  assert insertionSort.isSorted(insertionSortedData);
 			  insertionWriter.write(insertionSort.getCount() + " " + insertionSort.getTime() + " ");
+			  // insertionWriter.write("Count: " + insertionSort.getCount() + " Comparisons: " + insertionSort.getComparisons() + " Swaps: " + insertionSort.getSwaps() + " ");
 		  }
 		  insertionWriter.write("\n");
 	  }
