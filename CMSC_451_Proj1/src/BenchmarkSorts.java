@@ -17,7 +17,7 @@ public class BenchmarkSorts {
 
   public static void main(String[] args) throws IOException, UnsortedException{
 	  // 12 evenly spaced data set sizes
-	  int[] datasetSizes = new int[]{500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000};
+	  int[] datasetSizes = new int[]{100,200,300,400,500,600,700,800,900,1000,1100,1200};
 	  
 	  // create sorts
 	  AbstractSort bubbleSort = new BubbleSort();
