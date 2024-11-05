@@ -1,9 +1,12 @@
 
 public class InsertionSort extends AbstractSort {
-
+	/*
+	 * need to clone array to avoid sequential sorting in place issue
+	 * was running into issue where when InsertionSort ran it was sorting the BubbleSorted arrays
+	 */
   @Override
   public int[] sort(int[] arr) {
-	  int[] array = arr.clone(); // need to clone array to avoid sequential sorting in place issue
+	  int[] array = arr.clone();
 	  int n = array.length;
 	  for (int i = 1; i < n; i++) {
 		  int key = array[i];
