@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
@@ -11,9 +12,9 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class BenchmarkReport {
-  private static double computeCoef(ArrayList<Long> values, long mean) {
+  private static double computeCoef(ArrayList<Double> values, double mean) {
     double sumOfSquares = 0;
-    for (long value : values) {
+    for (double value : values) {
       sumOfSquares += Math.pow(value - mean, 2);
     }
     double variance = sumOfSquares / values.size();
@@ -25,6 +26,7 @@ public class BenchmarkReport {
     String[] columnNames = {"Size", "Avg Count", "Coef Count", "Avg Time", "Coef Time"};
     DefaultTableModel dtm = new DefaultTableModel(columnNames, 0);
     JTable table = new JTable(dtm);
+    DecimalFormat df = new DecimalFormat("#.00");
 
     BufferedReader br;
     try {
@@ -34,29 +36,34 @@ public class BenchmarkReport {
         String[] data = line.split(" ");
         int size = Integer.parseInt(data[0]);
 
-        ArrayList<Long> counts = new ArrayList<>();
-        ArrayList<Long> times = new ArrayList<>();
+        ArrayList<Double> counts = new ArrayList<>();
+        ArrayList<Double> times = new ArrayList<>();
 
         for (int i = 1; i < data.length - 1; i += 2) {
-          counts.add(Long.parseLong(data[i]));
-          times.add(Long.parseLong(data[i + 1]));
+          counts.add(Double.parseDouble(data[i]));
+          times.add(Double.parseDouble(data[i + 1]));
         }
 
-        long sumCount = 0;
-        for (long count : counts) {
+        double sumCount = 0;
+        for (double count : counts) {
           sumCount += count;
         }
-        long avgCount = (long) sumCount / counts.size();
+        double avgCount = sumCount / counts.size();
         double coefCount = computeCoef(counts, avgCount);
 
-        long sumTime = 0;
-        for (long time : times) {
+        double sumTime = 0;
+        for (double time : times) {
           sumTime += time;
         }
-        long avgTime = (long) sumTime / times.size();
+        double avgTime = sumTime / times.size();
         double coefTime = computeCoef(times, avgTime);
+        
+        String avgCountString = df.format(avgCount);
+        String coefCountString = df.format(coefCount) + "%";
+        String avgTimeString = df.format(avgTime);
+        String coefTimeString = df.format(coefTime) + "%";
 
-        dtm.addRow(new Object[] {size, avgCount, coefCount, avgTime, coefTime});
+        dtm.addRow(new Object[] {size,avgCountString,coefCountString,avgTimeString,coefTimeString});
       }
     } catch (FileNotFoundException e) {
       e.printStackTrace();
