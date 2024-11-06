@@ -12,6 +12,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class BenchmarkReport {
+  /* Computes the coefficients of variance of a list */
   private static double computeCoef(ArrayList<Double> values, double mean) {
     double sumOfSquares = 0;
     for (double value : values) {
@@ -57,20 +58,21 @@ public class BenchmarkReport {
         }
         double avgTime = sumTime / times.size();
         double coefTime = computeCoef(times, avgTime);
-        
+
         String avgCountString = df.format(avgCount);
         String coefCountString = df.format(coefCount) + "%";
         String avgTimeString = df.format(avgTime);
         String coefTimeString = df.format(coefTime) + "%";
 
-        dtm.addRow(new Object[] {size,avgCountString,coefCountString,avgTimeString,coefTimeString});
+        dtm.addRow(
+            new Object[] {size, avgCountString, coefCountString, avgTimeString, coefTimeString});
       }
     } catch (FileNotFoundException e) {
       e.printStackTrace();
     } catch (IOException e) {
       e.printStackTrace();
     }
-    
+
     JFrame frame = new JFrame("Benchmark Report");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.add(new JScrollPane(table));
