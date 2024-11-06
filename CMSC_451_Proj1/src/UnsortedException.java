@@ -1,4 +1,3 @@
-
 @SuppressWarnings("serial")
 public class UnsortedException extends Exception {
 
