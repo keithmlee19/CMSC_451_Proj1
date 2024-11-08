@@ -11,7 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class BenchmarkReport {
+public class Report {
   /* Computes the coefficients of variance of a list */
   private static double computeCoef(ArrayList<Double> values, double mean) {
     double sumOfSquares = 0;
