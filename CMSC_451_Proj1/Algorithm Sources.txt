@@ -1,0 +1,3 @@
+Bubble Sort: https://www.geeksforgeeks.org/java-program-for-bubble-sort/
+
+Insertion Sort: https://www.geeksforgeeks.org/insertion-sort-algorithm/
