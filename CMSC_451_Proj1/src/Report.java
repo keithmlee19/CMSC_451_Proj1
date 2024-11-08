@@ -26,7 +26,8 @@ public class Report {
 
   private static void createReport(String filePath) {
     // column names
-    String[] columnNames = {"Size", "Avg Count", "Coef Count", "Avg Time", "Coef Time"};
+    String[] columnNames = {"Size", "Avg Count", "Coef Count", "Avg Time", "Coef Time"};   
+    // table to house data
     DefaultTableModel dtm = new DefaultTableModel(columnNames, 0);
     JTable table = new JTable(dtm);
     DecimalFormat df = new DecimalFormat("#.00"); // format to 2 decimal places
@@ -39,6 +40,7 @@ public class Report {
         String[] data = line.split(" ");
         int size = Integer.parseInt(data[0]); // first entry is the size of the array
 
+        // arraylists to hold counts and times from each line
         ArrayList<Double> counts = new ArrayList<>();
         ArrayList<Double> times = new ArrayList<>();
 
