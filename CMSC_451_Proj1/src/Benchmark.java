@@ -35,8 +35,8 @@ public class Benchmark {
     AbstractSort insertionSort = new InsertionSort();
 
     // initialize FileWriters for outputs
-    FileWriter bubbleWriter = new FileWriter("bubbleOutput.txt");
-    FileWriter insertionWriter = new FileWriter("insertionOutput.txt");
+    FileWriter bubbleWriter = new FileWriter("BubbleSort.txt");
+    FileWriter insertionWriter = new FileWriter("InsertionSort.txt");
 
     // 5000 warmup runs per sort - not recorded
     warmupData = generateWarmupData();
