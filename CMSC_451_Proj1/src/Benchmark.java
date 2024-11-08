@@ -1,7 +1,7 @@
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class BenchmarkSorts {
+public class Benchmark {
   private static final int NUM_DATASETS = 40;
   private static int[][] sortingData;
   private static int[][] warmupData;
